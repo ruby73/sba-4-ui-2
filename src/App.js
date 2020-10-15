@@ -1,27 +1,24 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Nav } from './components'
-import { Board, Home, Item, User } from './pages'
-import { UserLogin, UserRegister, UserRemove, UserUpdate } from './components/user'
- 
-const App = () => {return<>
-  <Router>
-    <Nav/>
-      <Switch>
-        <Route exact path="/" component={Home}></Route>
-        
-        <Route exact path="/user" component={User}></Route>
-        <Route path="/user/login" component={UserLogin}></Route>
-        <Route path="/user/register" component={UserRegister}></Route>
-        <Route path="/user/update" component={UserUpdate}></Route>
-        <Route path="/user/remove" component={UserRemove}></Route>
-        <Route path="/user/remove" component={UserRemove}></Route>
-
-        <Route path="/board" component={Board}></Route>
-        <Route path="/item" component={Item}></Route>
-      </Switch>
-  </Router>
-</>
-}
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import {Nav} from './components'
+import {UserRegister, UserLogin, UserDetail, UserModify, UserWithdrawal} from './container/user'
+import {Home, User, Board, Item} from './templates'
+const App = () => (<>
+    <Router>
+        <Nav/>
+        <Switch>
+            <Route path='/home' component={Home}></Route>
+            <Redirect exact from = {'/'} to={'/home'}/>
+            <Route path='/user' component={User}></Route>
+            <Route path='/signup-form' component={UserRegister}/>
+            <Route path='/signin-form' component={UserLogin}/>
+            <Route path='/mypage' component={UserDetail}/>
+            <Route path='/modifying-user-info' component={UserModify}/>
+            <Route path='/membership-withdrawal' component={UserWithdrawal}/>
+            <Route path='/item' component={Item}></Route>
+            <Route path='/board' component={Board}></Route>
+        </Switch>
+    </Router>
+</>)
 
 export default App
